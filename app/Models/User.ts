@@ -1,7 +1,8 @@
 import { DateTime } from 'luxon'
 import Hash from '@ioc:Adonis/Core/Hash'
-import { column, beforeSave, BaseModel, hasMany, HasMany } from '@ioc:Adonis/Lucid/Orm';
-import Website from './Website';
+import { column, beforeSave, BaseModel, hasMany, HasMany } from '@ioc:Adonis/Lucid/Orm'
+import Website from './Website'
+import Blog from './Blog'
 
 export default class User extends BaseModel {
   // properties
@@ -42,6 +43,11 @@ export default class User extends BaseModel {
   //relationships
   @hasMany(() => Website)
   public websites: HasMany<typeof Website>
+
+  @hasMany(() => Blog, {
+    foreignKey: 'authorId',
+  })
+  public blogs: HasMany<typeof Blog>
 
   // decorators
   @beforeSave()

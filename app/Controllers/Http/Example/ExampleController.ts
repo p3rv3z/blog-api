@@ -1,6 +1,6 @@
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
-import ExampleService from './ExampleService';
-import ExampleValidator from './ExampleValidator';
+import ExampleService from './ExampleService'
+import ExampleValidator from './ExampleValidator'
 
 export default class ExampleController {
   private exampleService: ExampleService
@@ -24,10 +24,8 @@ export default class ExampleController {
       const payload = await this.exampleValidator.validateExampleSchema(request)
       return await this.exampleService.storeExample(payload)
     } catch (error) {
-      if (error.code === 'E_VALIDATION_FAILURE')
-        return response.status(422).send(error.messages)
-      else
-        return response.status(400).send({ msg: 'Site plan creating unsuccessfull' })
+      if (error.code === 'E_VALIDATION_FAILURE') return response.status(422).send(error.messages)
+      else return response.status(400).send({ msg: 'Site plan creating unsuccessful' })
     }
   }
 
@@ -41,8 +39,7 @@ export default class ExampleController {
         return response.status(404).send({ msg: 'Site plan not found' })
       else if (error.code === 'E_VALIDATION_FAILURE')
         return response.status(422).send(error.messages)
-      else
-        return response.status(400).send({ msg: 'Site plan updating unsuccessfull' })
+      else return response.status(400).send({ msg: 'Site plan updating unsuccessful' })
     }
   }
 
@@ -54,9 +51,7 @@ export default class ExampleController {
     } catch (error) {
       if (error.code === 'E_RECORD_NOT_FOUND')
         return response.status(404).send({ msg: 'Site plan not found' })
-      else
-        return response.status(400).send({ msg: 'Site plan deleting unsuccessfull' })
+      else return response.status(400).send({ msg: 'Site plan deleting unsuccessful' })
     }
-
   }
 }

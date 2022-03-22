@@ -6,8 +6,6 @@ export default class Blogs extends BaseSchema {
   public async up() {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id')
-      table.foreign('creator_id')
-      table.foreign('website_id')
       table.string('title', 191).notNullable()
       table.string('slug', 191).unique().notNullable()
       table.string('short_desc', 191).notNullable()
@@ -15,15 +13,29 @@ export default class Blogs extends BaseSchema {
       table.string('image', 191).nullable()
       table.string('banner', 191).nullable()
       table.string('status').notNullable()
-      table.string('category_name')
-      table.string('sub_category_name')
+      table.string('category_name').notNullable()
+      table.string('sub_category_name').notNullable()
       table.text('seo_meta_data').nullable()
       table.string('left_side_ad_code').nullable()
       table.string('right_side_ad_code').nullable()
       table.string('content_ad_code').nullable()
-      table.timestamp('publish_date', { useTz: true })
+      table.dateTime('published_at').nullable()
       table.timestamp('created_at', { useTz: true })
       table.timestamp('updated_at', { useTz: true })
+
+      table
+        .integer('author_id')
+        .unsigned()
+        .references('users.id')
+        .onUpdate('CASCADE')
+        .onDelete('CASCADE')
+
+      table
+        .integer('website_id')
+        .unsigned()
+        .references('websites.id')
+        .onUpdate('CASCADE')
+        .onDelete('CASCADE')
     })
   }
 

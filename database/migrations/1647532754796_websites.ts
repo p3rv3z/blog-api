@@ -6,11 +6,11 @@ export default class Websites extends BaseSchema {
   public async up() {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id').primary()
-      table.string('site_name', 191).notNullable()
-      table.string('site_desc', 191).notNullable()
-      table.string('site_link', 191).unique().notNullable()
-      table.string('site_subdomain', 191).notNullable()
-      table.string('site_current_plan', 191).notNullable()
+      table.string('name', 191).notNullable()
+      table.string('desc', 191).notNullable()
+      table.string('link', 191).unique().notNullable()
+      table.string('subdomain', 191).notNullable()
+      table.string('current_plan', 191).notNullable()
       table.text('header_code').notNullable()
       table.text('footer_code').notNullable()
       table.timestamp('created_at', { useTz: true })

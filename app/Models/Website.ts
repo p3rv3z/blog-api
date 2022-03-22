@@ -1,7 +1,8 @@
 import { DateTime } from 'luxon'
-import { BaseModel, BelongsTo, belongsTo, column } from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, BelongsTo, belongsTo, column, hasMany, HasMany } from '@ioc:Adonis/Lucid/Orm'
 import User from './User'
 import SitePlan from './SitePlan'
+import Blog from './Blog'
 
 export default class Website extends BaseModel {
   // properties
@@ -47,4 +48,7 @@ export default class Website extends BaseModel {
 
   @belongsTo(() => SitePlan)
   public sitePlan: BelongsTo<typeof SitePlan>
+
+  @hasMany(() => Blog)
+  public blogs: HasMany<typeof Blog>
 }

@@ -5,7 +5,7 @@ export default class WebsiteService {
   private websiteQuery: WebsiteQuery
 
   constructor() {
-    this.websiteQuery = new WebsiteQuery
+    this.websiteQuery = new WebsiteQuery()
   }
 
   public async isValidWebsite(id: number) {
